@@ -1,0 +1,20 @@
+{
+  "name": "devops",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "__________dev infra__________": "__________dev infra__________",
+    "docker:dev:restart": "npm run docker:dev:down && npm run docker:dev:up",
+    "docker:dev:down": "set -a && . ./.env.local && set +a && ./docker/dev/docker-compose-down.sh",
+    "docker:dev:up": "set -a && . ./.env.local && set +a && ./docker/dev/docker-compose-up.sh",
+    "docker:dev:clean-restart": "npm run docker:dev:clean-down && npm run docker:dev:up",
+    "docker:dev:clean-down": "set -a && . ./.env.local && set +a && ./docker/dev/docker-compose-clean-down.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.9.0",
+    "pg-promise": "^11.2.0"
+  }
+}
