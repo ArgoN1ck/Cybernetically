@@ -3,13 +3,14 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import * as env from 'env-var';
 import { readFileSync } from 'fs';
 import { AppModule } from './app/app.module';
+import { ValidationPipe } from './app/shared/pipes/validation.pipe';
 
 const DEFAULT_APP_HOST = 'localhost';
 const DEFAULT_APP_PORT = 3000;
@@ -17,7 +18,7 @@ const DEFAULT_APP_PORT = 3000;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(new ValidationPipe());
 
   const globalPrefix = 'api';
 
