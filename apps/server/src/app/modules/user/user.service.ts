@@ -1,5 +1,6 @@
 import { PrismaClientService } from '@cybernetically/prisma/server';
 import {
+  ConflictException,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -7,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { HashingService } from '../../services/hashing.service';
 import { User } from './types/user.type';
+import { UserDto } from './dtos/user.dto';
 
 @Injectable()
 export class UserService {
@@ -39,7 +41,7 @@ export class UserService {
     }
   }
 
-  async create({ username, password }): Promise<User> {
+  async create({ username, password }: UserDto): Promise<User> {
     try {
       const hashPassword = await this.hashingService.hashPassword(password);
 
@@ -63,7 +65,12 @@ export class UserService {
       );
     } catch (err) {
       this.logger.error(err, err.stack);
-
+      if (err.code === 'P2002') {
+        throw new ConflictException({
+          message: 'CONFLICT',
+          description: `User with this username already exists`,
+        });
+      }
       throw new InternalServerErrorException({
         message: 'SERVER_ERROR',
         description: 'Something went wrong ;(',
