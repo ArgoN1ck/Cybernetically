@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'source sans pro', sans-serif;
+  background-color: var(--primary-color);
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.root {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+.content {
+  height: 80vh;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}

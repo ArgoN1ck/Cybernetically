@@ -20,6 +20,10 @@ import { CounterModule } from './modules/counter/counter.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).exclude('auth/(.*)').forRoutes('*');
+    consumer
+      .apply(AuthMiddleware)
+      .exclude('auth/(.*)')
+      .exclude('users/available/username')
+      .forRoutes('*');
   }
 }

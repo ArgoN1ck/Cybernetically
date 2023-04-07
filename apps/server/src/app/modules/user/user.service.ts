@@ -85,6 +85,6 @@ export class UserService {
       },
     });
 
-    return !notExistingUser;
+    return !!notExistingUser;
   }
 }

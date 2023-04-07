@@ -1,4 +1,4 @@
-import { NotFoundException, Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { RoleEnum } from '../../shared/modules/jwt-token/enums/role.enum';
 import { JwtTokenService } from '../../shared/modules/jwt-token/jwt-token.service';
 import { UserService } from '../user/user.service';
@@ -37,9 +37,9 @@ export class AuthService {
         user,
       };
     } catch (err) {
-      throw new NotFoundException({
-        message: 'NOT_FOUND',
-        description: 'User with this username or password not found',
+      throw new BadRequestException({
+        message: 'BAD_REQUEST',
+        description: 'Username or password is invalid',
       });
     }
   }
