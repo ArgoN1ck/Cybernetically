@@ -1,0 +1,45 @@
+<div class="container">
+  <h1 class="header__logo" routerLink="/">Counter</h1>
+  <nav class="header__nav">
+    <ng-container
+      *ngTemplateOutlet="(isAuthenticated$ | async) ? authorized : unauthorized"
+    ></ng-container>
+  </nav>
+</div>
+
+<ng-template #unauthorized>
+  <cybernetically-navigation class="header__nav">
+    <ul class="nav__items">
+      <li *ngFor="let item of commonNavItems" class="nav__item">
+        <img *ngIf="item.img" [src]="item.img" />
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="nav__link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav__link"
+          >{{ item.title }}</a
+        >
+      </li>
+    </ul>
+  </cybernetically-navigation>
+</ng-template>
+
+<ng-template #authorized>
+  <cybernetically-navigation class="header__nav">
+    <ul class="nav__items">
+      <li *ngFor="let item of authNavItems" class="nav__item">
+        <img *ngIf="item.img" [src]="item.img" />
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="nav__link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav__link"
+          >{{ item.title }}</a
+        >
+      </li>
+      <li>
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </cybernetically-navigation>
+</ng-template>

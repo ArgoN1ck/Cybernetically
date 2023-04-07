@@ -1,0 +1,61 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ul *ngIf="backendErrors$ | async as error" class="error__fields">
+    <li class="error__field">
+      {{ error }}
+    </li>
+  </ul>
+
+  <fieldset>
+    <ul
+      *ngIf="
+        form.get('username')?.dirty ||
+        (form.get('username')?.touched && form.get('username')?.invalid)
+      "
+      class="error__fields"
+    >
+      <li
+        *ngIf="form.get('username')?.hasError('required')"
+        class="error__field"
+      >
+        Username is required
+      </li>
+    </ul>
+    <input formControlName="username" type="text" placeholder="Username" />
+
+    <ul
+      *ngIf="
+        form.get('password')?.dirty ||
+        (form.get('password')?.touched && form.get('password')?.invalid)
+      "
+      class="error__fields"
+    >
+      <li
+        *ngIf="form.get('password')?.hasError('required')"
+        class="error__field"
+      >
+        Password is required
+      </li>
+      <li
+        *ngIf="form.get('password')?.hasError('minlength')"
+        class="error__field"
+      >
+        Password must be
+        <strong>{{
+          form.get('password')?.getError('minlength').requiredLength
+        }}</strong>
+        characters. Actual length is
+        <strong>{{
+          form.get('password')?.getError('minlength').actualLength
+        }}</strong>
+      </li>
+    </ul>
+    <input formControlName="password" type="password" placeholder="Password" />
+    <button
+      [disabled]="form.invalid || (isLoading$ | async)"
+      type="submit"
+      class="btn btn-primary"
+    >
+      Sign In
+    </button>
+  </fieldset>
+</form>

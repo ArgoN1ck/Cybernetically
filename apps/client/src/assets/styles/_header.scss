@@ -1,0 +1,46 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 10px 40px;
+  background-color: var(--second-color);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header__logo {
+    font-family: 'titillium web', sans-serif;
+    font-size: 24px;
+    color: var(--primary-color);
+    cursor: pointer;
+  }
+
+  .header__nav {
+    display: flex;
+
+    .nav__items {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .nav__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav__link {
+      color: var(--third-color);
+      &:hover,
+      &-active {
+        color: black;
+      }
+    }
+  }
+}

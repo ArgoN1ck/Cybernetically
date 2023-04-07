@@ -5,7 +5,6 @@ import { AvailableUserDto } from './dtos/available-user.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
 
 @ApiTags('Users')
-@UseGuards(AuthGuard)
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}

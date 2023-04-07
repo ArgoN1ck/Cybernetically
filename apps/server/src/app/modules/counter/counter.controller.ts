@@ -4,8 +4,8 @@ import {
   ForbiddenException,
   Get,
   Param,
+  Post,
   Put,
-  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CounterService } from './counter.service';
@@ -28,11 +28,12 @@ export class CounterController {
     return await this.counterService.findByUserId(userId);
   }
 
-  @Get('counters/increment')
-  async incrementCount(@User('id') userId: string) {
-    const { count, userId: ownerId } = await this.counterService.findByUserId(
-      userId
-    );
+  @Post('counters/increment')
+  async incrementCount(
+    @User('id') userId: string,
+    @Body() { count }: CounterDto
+  ) {
+    const { userId: ownerId } = await this.counterService.findByUserId(userId);
 
     if (ownerId !== userId) {
       throw new ForbiddenException({
