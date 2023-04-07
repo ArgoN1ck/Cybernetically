@@ -1,0 +1,31 @@
+<section class="counter">
+  <h1 class="counter__title">Count</h1>
+  <span
+    class="counter__count"
+    *ngIf="counter$ | async as counter; else loading"
+    >{{ counter.count }}</span
+  >
+
+  <div class="counter__btns">
+    <button
+      [disabled]="isLoading$ | async"
+      class="btn btn-danger"
+      (click)="saveCount()"
+    >
+      Save
+    </button>
+    <button
+      [disabled]="isLoading$ | async"
+      class="btn btn-success"
+      (click)="getIncrementalCount()"
+    >
+      Increment
+    </button>
+  </div>
+</section>
+
+<ng-template #modalTemplate> </ng-template>
+
+<ng-template #loading>
+  <div class="loader"></div>
+</ng-template>
